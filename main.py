@@ -37,7 +37,6 @@ if type_of_attack == 1:
         new_word = word.replace("\n", "")
         disc_list.append(new_word)
     for i in disc_list:
-        time.sleep(0.5)
         if len(hash) == 32:
             disc_hash = hashlib.md5(i.encode("utf-8")).hexdigest()
         elif len(hash) == 40:
@@ -56,7 +55,7 @@ if type_of_attack == 1:
             print("\nPassword found! ", i)
             break
         if disc_hash != hash and disc_list.index(i) == len(disc_list) - 1:
-            print("Passoword not found!")
+            print("Password not found!")
             break
 
 
@@ -182,7 +181,9 @@ if type_of_attack == 3:
 
     chars = "abcdefghijklmnopqrstuvwxyz0123456789"
 
+    print(" \n Random password attacking starting..")
     def main():
+        time.sleep(0.5)
         while True:
             if "correct_pass.txt" in os.listdir():
                 break
