@@ -1,6 +1,5 @@
 import hashlib
 
-pass = input("Enter Your Pass: ")
-hash = hashlib.sha256(pass.encode("utf-8")).hexdigest()
+hash = hashlib.sha256(('1980').encode("utf-8")).hexdigest()
 print(str(hash))
 
