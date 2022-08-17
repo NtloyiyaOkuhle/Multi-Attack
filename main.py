@@ -182,9 +182,7 @@ if type_of_attack == 3:
 
     chars = "abcdefghijklmnopqrstuvwxyz0123456789"
 
-    print(" \n Random password attacking starting..")
     def main():
-        time.sleep(0.5)
         while True:
             if "correct_pass.txt" in os.listdir():
                 break
