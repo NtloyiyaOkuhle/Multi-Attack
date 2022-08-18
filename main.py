@@ -19,6 +19,16 @@ let_numbs = letters + numbs
 let_punc = letters + punc
 numbs_punc = numbs + punc
 all_characters = letters + numbs + punc
+print('''
+      ==========================================WELCOME TO MULTI-ATTACK=============================================================
+      Author:Ntloyiya Okuhle
+      Language:Python3                      =====  ====      =======
+      Email:blessing.ntloyiya@gmail.com     === === ===  --  == = ==
+      Site:okuhlentloyiya.com               ===     ===      ==   ==
+      
+      *Note* This tools is made for educational purposes, if you are caught doing illegal actions with it I will not be responsible.
+      ==============================================================================================================================
+      \n\n''')
 
 hash = str(input("Enter the password hash: "))
 
@@ -37,13 +47,14 @@ if type_of_attack == 1:
         new_word = word.replace("\n", "")
         disc_list.append(new_word)
     for i in disc_list:
+    
+        
         if len(hash) == 32:
             disc_hash = hashlib.md5(i.encode("utf-8")).hexdigest()
         elif len(hash) == 40:
             disc_hash = hashlib.sha1(i.encode("utf-8")).hexdigest()
         elif len(hash) == 64:
             disc_hash = hashlib.sha256(i.encode("utf-8")).hexdigest()
-
         if disc_hash == hash:
             time.sleep(0.5)
             print("\n \n")
@@ -130,7 +141,7 @@ if type_of_attack == 2:
         print("\n \n")
 
         # These print information for the user on the progress of the crack.
-        print("Similar Password: "+ gen_str )
+        #print("Similar Password: "+ gen_str )
         print("We are currently at ", (counter / (time.time() - start)), "attempts per seconds")
         print("It has been ", time.time() - start, " seconds!")
         print("We have tried ", counter, " possible passwords!")
@@ -142,7 +153,7 @@ if type_of_attack == 2:
         elif len(hash) == 40:
             generated_hash = hashlib.sha1(gen_str.encode("utf-8")).hexdigest()
         elif len(hash) == 64:
-            generated_hash = hashlib.sha256(gen_str.encode("utf-8")).hexdigest()
+            generated_hash = hashlib.sha256(repr(gen_str).encode("utf-8")).hexdigest()
 
         if hash == generated_hash:
                 # This takes the time at which the program finished.
