@@ -145,7 +145,7 @@ if type_of_attack == 2:
         print("We are currently at ", (counter / (time.time() - start)), "attempts per seconds")
         print("It has been ", time.time() - start, " seconds!")
         print("We have tried ", counter, " possible passwords!")
-        print("trying.......... " + gen_str)
+        print("trying.......... " + repr(gen_str))
 
 
         if len(hash) == 32:
