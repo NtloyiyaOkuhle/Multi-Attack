@@ -72,15 +72,16 @@ try:
 
 
      if type_of_attack == 2:
-          type_of_characters = int(input("\nWhat type of characters do you want to try?\n\n"
-                                         "1. All character\n"
-                                         "2.Only letters\n"
-                                         "3. Letters and numbers\n"
-                                         "4.Letters and Punctuactions\n"
-                                         "5. Numbers and punctuations\n"
-                                         "6. Numbers only"
-                                         "\n"
-                                         "Enter your choice here: "))
+      
+     type_of_characters = int(input("\nWhat type of characters do you want to try?\n\n"
+                                   "1. All character\n"
+                                   "2.Only letters\n"
+                                   "3. Letters and numbers\n"
+                                   "4.Letters and Punctuactions\n"
+                                   "5. Numbers and punctuations\n"
+                                   "6. Numbers only"
+                                   "\n"
+                                   "Enter your choice here: "))
           if type_of_characters == 1:
               choice_of_char = all_characters
           elif type_of_characters == 2:
