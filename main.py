@@ -39,7 +39,8 @@ type_of_attack = int(input("\nWhat type of attack do you want to do?\n\n"
                            "Enter your choice: "))
 disc_list = []
 
-if type_of_attack == 1:
+try:
+      if type_of_attack == 1:
     print("\nCracking......./")
     dictionary_file = open("Passwords.txt", errors="ignore")
     content = dictionary_file.readlines()
@@ -227,3 +228,7 @@ if type_of_attack == 3:
 
     for x in range(20):
         Thread(target=main).start()
+            
+       
+except:
+      print('Either we are unable to crack the password or you did not enter your hash')
