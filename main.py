@@ -71,7 +71,7 @@ try:
             break
 
 
-      if type_of_attack == 2:
+     if type_of_attack == 2:
           type_of_characters = int(input("\nWhat type of characters do you want to try?\n\n"
                                          "1. All character\n"
                                          "2.Only letters\n"
