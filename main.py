@@ -40,7 +40,7 @@ type_of_attack = int(input("\nWhat type of attack do you want to do?\n\n"
 disc_list = []
 
 try:
-      if type_of_attack == 1:
+    if type_of_attack == 1:
     print("\nCracking......./")
     dictionary_file = open("Passwords.txt", errors="ignore")
     content = dictionary_file.readlines()
