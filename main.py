@@ -219,7 +219,7 @@ if type_of_attack == 3:
 
             send_data_url = requests.post(url, data=data)
 
-            if "Invalid Password" in str(send_data_url.content):
+            if "Invalid Password" or "login failed!" in str(send_data_url.content):
 
                 print("[*] Attempting password: %s" % password)
 
