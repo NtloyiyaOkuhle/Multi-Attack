@@ -245,7 +245,7 @@ if type_of_attack == 4:
     try:
         host = input("[*] Enter Target Host Address: ")
         user = input("[*]Enter SSH Username: ")
-        input_file =("[*] Enter SSH Password File: ")
+        input_file =input("[*] Enter SSH Password File: ")
         
         if os.path.exists(input_file) == False:
             print("\n[*] File Path Does Not Exist !!")
