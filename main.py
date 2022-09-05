@@ -159,7 +159,7 @@ if type_of_attack == 2:#Bruteforce attacking option
             #print(f"{Fore.YELLOW}We are currently at ", (counter / (time.time() - start)), "attempts per seconds")
             #print(f"{Fore.YELLOW}It has been ", time.time() - start, " seconds!")
             #print(f"{Fore.YELLOW}We have tried ", counter, " possible passwords!")
-            print(f"{Fore.YELLOW}trying.......... " + gen_str)
+            print(Fore.YELLOW"Trying =======>", gen_str)
 
 
             if len(hash) == 32:
