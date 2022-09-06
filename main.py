@@ -193,7 +193,7 @@ if type_of_attack == 2:#Bruteforce attacking option
                         #if file is not empty then append /n'
                         data = f.read(100)
                         if len(data) > 0 :
-                              f.write("/n")
+                              f.write("\n")
                          #append pass at the end of file
                         f.writelines(gen_str)
                         print(Fore.GREEN + "Password Successfully saved!")
