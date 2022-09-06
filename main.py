@@ -188,7 +188,7 @@ if type_of_attack == 2:#Bruteforce attacking option
                 save_pass = input("Do you want to save the password(N/Y)?: ")
                 if save_pass == "Y":
                   with open('Passwords.tx', 'w') as f:
-                        f.write({save_pass})
+                        f.write(save_pass)
                 else:
                   pass
 
