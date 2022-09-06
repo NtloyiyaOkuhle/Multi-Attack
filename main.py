@@ -188,6 +188,13 @@ if type_of_attack == 2:#Bruteforce attacking option
                 save_pass = input("Do you want to save the password(N/Y)?: ")
                 if save_pass == "Y":
                   with open('Passwords.txt', 'a') as f:
+                        #move read cursor to the start of file
+                        f.seek(0)
+                        #if file is not empty then append /n'
+                        data = f.read(100)
+                        if len(data) > 0 :
+                              f.write("/n")
+                         #append pass at the end of file
                         f.writelines("/n"gen_str)
                         print(Fore.GREEN + "Password Successfully saved!")
                 else:
