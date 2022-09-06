@@ -187,8 +187,8 @@ if type_of_attack == 2:#Bruteforce attacking option
                 print("That is ", counter / timetaken, " attempts per second!")
                 save_pass = input("Do you want to save the password(N/Y)?: ")
                 if save_pass == "Y":
-                  with open('Passwords.txt', 'w') as f:
-                        f.writelines(save_pass)
+                  with open('Passwords.txt', 'a') as f:
+                        f.writelines("/n"gen_str)
                         print(Fore.GREEN + "Password Successfully saved!")
                 else:
                   pass
