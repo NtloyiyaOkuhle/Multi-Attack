@@ -189,6 +189,7 @@ if type_of_attack == 2:#Bruteforce attacking option
                 if save_pass == "Y":
                   with open('Passwords.tx', 'w') as f:
                         f.write(save_pass)
+                        print(Fore.GREEN + "Password Successfully saved!")
                 else:
                   pass
 
