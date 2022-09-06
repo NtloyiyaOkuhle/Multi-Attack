@@ -195,7 +195,7 @@ if type_of_attack == 2:#Bruteforce attacking option
                         if len(data) > 0 :
                               f.write("/n")
                          #append pass at the end of file
-                        f.writelines("/n"gen_str)
+                        f.writelines(gen_str)
                         print(Fore.GREEN + "Password Successfully saved!")
                 else:
                   pass
