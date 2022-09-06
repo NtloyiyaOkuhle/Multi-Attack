@@ -185,6 +185,12 @@ if type_of_attack == 2:#Bruteforce attacking option
 
                     # This tells the user how many attempst were made per second.
                 print("That is ", counter / timetaken, " attempts per second!")
+                save_pass = input("Do you want to save the password(N/Y)?: ")
+                if save_pass == "Y":
+                  with open('Passwords.tx', 'w') as f:
+                        f.write({save_pass})
+                else:
+                  pass
 
 
                 break
