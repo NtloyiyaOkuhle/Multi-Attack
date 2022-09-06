@@ -187,7 +187,7 @@ if type_of_attack == 2:#Bruteforce attacking option
                 print("That is ", counter / timetaken, " attempts per second!")
                 save_pass = input("Do you want to save the password(N/Y)?: ")
                 if save_pass == "Y":
-                  with open('Passwords.txt', 'a') as f:
+                  with open('Passwords.txt', 'a+') as f:
                         #move read cursor to the start of file
                         f.seek(0)
                         #if file is not empty then append /n'
