@@ -235,6 +235,7 @@ class PasswordCracker(Thread):
 
 def perform_dict_attack(password_hash: str) -> None:
     global password_found  
+    start_time = time.time() 
     # Capture network traffic during attack
     network_traffic = capture_network_traffic()
 
@@ -292,7 +293,9 @@ def perform_dict_attack(password_hash: str) -> None:
         provide_feedback("dictionary", success)
         # Adapt the attack strategy based on feedback
         adapt_attack_strategy("dictionary")
-
+        end_time = time.time()  # Track the end time of the attack
+        elapsed_time = end_time - start_time  # Calculate elapsed time
+        print(colored(f"Dictionary Attack Time: {elapsed_time:.2f} seconds","magenta"))  # Display elapsed time
         print("\nGoodbye!")
         sys.exit(0)
 
@@ -302,6 +305,7 @@ def perform_dict_attack(password_hash: str) -> None:
         logger.error(f"Error occurred: {e}")
 
 def perform_brute_force_attack(password_hash: str, numb_of_char: int, type_of_characters: int) -> None:
+    start_time = time.time()
     # Capture network traffic during attack
     network_traffic = capture_network_traffic()
 
@@ -357,6 +361,11 @@ def perform_brute_force_attack(password_hash: str, numb_of_char: int, type_of_ch
         provide_feedback("brute_force", success)
         # Adapt the attack strategy based on feedback
         adapt_attack_strategy("brute_force")
+
+        end_time = time.time()  # Track the end time of the attack
+        elapsed_time = end_time - start_time  # Calculate elapsed time
+        print(colored(f"Brute Force Attack Time: {elapsed_time:.2f} seconds","magenta"))  # Display elapsed time
+
         print("\nGoodbye!")
         sys.exit(0)
 
